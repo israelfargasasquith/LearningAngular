@@ -1,3 +1,32 @@
 <h1>{{nombreComponente}} </h1>
 
-<p>{{listaEmpleados}}</p>
+<h2>Trabajadores</h2>
+<hr>
+
+<button (click) = "cambiarValorJefe()">Cambiar valor de mostrarJefe</button>
+
+<ul *ngIf="mostrarJefe == true">
+    <li>
+        {{jefe.nombre}}
+    </li>
+    <li>
+        {{jefe.edad }}
+    </li>
+    <li>
+        {{jefe.sueldo}}
+    </li>
+
+</ul>
+
+<ul>
+    <li>
+        {{ trabajadores[0].nombre}}
+    </li>
+    <li>
+        {{ trabajadores[0].edad}}
+    </li>
+    <li>
+        {{trabajadores[0].sueldo}}
+    </li>
+
+</ul>

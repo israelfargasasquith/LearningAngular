@@ -11,11 +11,13 @@ export class EmpleadoComponent {
     public jefe: Empleado;
     public trabajadores: Array<Empleado>;
     public mostrarJefe: boolean;
+    public color: string;
 
     constructor() {
         this.jefe = new Empleado("Israel", 24, 3000);
         this.trabajadores = [new Empleado("Pepe", 24, 3000), new Empleado("Alfonos", 24, 3000), new Empleado("Marta", 24, 3000)];
         this.mostrarJefe = true;
+        this.color = '#ccc';
     }
 
     cambiarValorJefe() {

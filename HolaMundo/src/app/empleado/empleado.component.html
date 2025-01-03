@@ -3,9 +3,9 @@
 <h2>Trabajadores</h2>
 <hr>
 
-<button (click) = "cambiarValorJefe()">Cambiar valor de mostrarJefe</button>
+<button (click)="cambiarValorJefe()">Cambiar</button>
 
-<ul *ngIf="mostrarJefe == true">
+<ul *ngIf="mostrarJefe; else noMostrado">
     <li>
         {{jefe.nombre}}
     </li>
@@ -15,18 +15,47 @@
     <li>
         {{jefe.sueldo}}
     </li>
-
 </ul>
 
-<ul>
-    <li>
-        {{ trabajadores[0].nombre}}
-    </li>
-    <li>
-        {{ trabajadores[0].edad}}
-    </li>
-    <li>
-        {{trabajadores[0].sueldo}}
-    </li>
+<ng-template #noMostrado>
+    Jefe no mostrado
+</ng-template>
 
+<hr>
+<h3>Listado de trabajadores</h3>
+<ul>
+    <li *ngFor="let empleado of trabajadores; let i = index">
+        Empleado {{i+1}} :
+        <ul>
+            <li> {{empleado.nombre}} </li>
+            <li> {{empleado.edad}} </li>
+            <li> {{empleado.sueldo}} </li>
+        </ul>
+    </li>
+</ul>
+
+<hr>
+
+<fieldset [style.border]="color === 'red' ? '5px solid black': '3px dashed black'" [ngClass]="{ 
+        fondoAzul: color === 'blue',
+        fondoVerde: color === 'green'
+    }">
+    <!--Si queremos añadir clases de forma obligatoria en el ngClass hacemos =>  [ngClass]="['fondoAzul','fondoVerde']"-->
+    <legend>Cambia de color</legend>
+    <input type="radio" name="cambiaColor" value="red" [(ngModel)]="color">
+    <label>Red</label>
+
+    <input type="radio" name="cambiaColor" value="blue" [(ngModel)]="color">
+    <label>Blue</label>
+
+    <input type="radio" name="cambiaColor" value="green" [(ngModel)]="color">
+    <label>Green</label>
+
+</fieldset>
+
+<ul [ngSwitch]="color">
+    <li *ngSwitchCase="'red'" [ngStyle]="{'background':color, 'color':'white'}">Es de color rojo</li>
+    <li *ngSwitchCase="'blue'" [ngStyle]="{'background':color, 'color':'white'}">Es de color azul</li>
+    <li *ngSwitchCase="'green'" [ngStyle]="{'background':color, 'color':'white'}">Es de color verde</li>
+    <li *ngSwitchDefault="" [ngStyle]="{'background':color, 'color':'black'}">Es de color por defecto</li>
 </ul>

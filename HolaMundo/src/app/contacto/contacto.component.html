@@ -1,0 +1,12 @@
+<h2>Contacta conmigo</h2>
+
+<a>Mi GitHub</a>
+<a>Mi Twitter</a>
+
+<div *ngIf="parametro; else sinParametro">
+    Hola {{parametro}}
+</div>
+
+<ng-template #sinParametro>
+    <br> <button (click)="conParametro()">Ir a página con parametro</button>
+</ng-template>

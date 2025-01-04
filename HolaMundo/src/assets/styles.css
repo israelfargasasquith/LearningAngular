@@ -9,3 +9,9 @@ body {
 .fondoVerde {
     background: rgb(173, 228, 178);
 }
+
+.activado {
+    color: white;
+    size: 12px;
+    background-color: black;
+}

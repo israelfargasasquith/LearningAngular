@@ -1,6 +1,16 @@
 <h1>Bienvenido a la primer aplicacion de IFA</h1>
-
+<hr>
+<h2>Fecha de hoy</h2>
+{{fecha | date:'fullDate'}}<br>
+Con mi formato:<br>
+{{fecha | date:'dd/MM/yy'}}<br>
+<hr>
+<h2>Prendas de ropa:</h2>
+<input placeholder="Añadir prenda" type="text" [(ngModel)]="prendaAGuardar"> <button (click)="nuevaPrenda()">Añadir
+    Prenda</button>
 <ul>
-    <li><a>Componente fruta</a></li>
-    <li><a>Componente empleado</a></li>
+    <li *ngFor="let prenda of coleccionRopa; let i=index">
+        {{prenda}}
+        <button (click)="eliminarPrenda(i)">Elimnar Prenda</button>
+    </li>
 </ul>

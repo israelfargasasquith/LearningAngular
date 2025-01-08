@@ -1,9 +1,11 @@
 <h1>Bienvenido a la primer aplicacion de IFA</h1>
 <hr>
 <h2>Fecha de hoy</h2>
-{{fecha | date:'fullDate'}}<br>
+{{fecha | date:'fullDate'}}<br> <!-- Pipe para formato de fecha -->
 Con mi formato:<br>
 {{fecha | date:'dd/MM/yy'}}<br>
+<br>
+Mi pipe conversor: {{5 | conversor:5}}
 <hr>
 <h2>Prendas de ropa:</h2>
 <input placeholder="Añadir prenda" type="text" [(ngModel)]="prendaAGuardar"> <button (click)="nuevaPrenda()">Añadir

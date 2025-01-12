@@ -1,6 +1,7 @@
 <h2> Componente de Coches</h2>
 
-<form #formCoche="ngForm" (ngSubmit)="onSubmmit()">
+<form #formCoche="ngForm" (ngSubmit)="onSubmmit();">
+    <!--  formCoche.reset(); Da error porque borra el objeto e introduce el objeto vacio en la lista -->
     <label>Nombre:</label>
     <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="coche.nombre" required>
     <span *ngIf="nombre.touched && !nombre.valid">
@@ -8,28 +9,26 @@
     </span>
     <br>
     <label>Caballos:</label>
-    <input type="text" name="caballos" #nombre="ngModel" [(ngModel)]="coche.caballos" required>
-    <span *ngIf="nombre.touched && !nombre.valid">
+    <input type="text" name="caballos" #caballos="ngModel" [(ngModel)]="coche.caballos" required pattern="[0-9]+">
+    <span *ngIf="caballos.touched && !caballos.valid">
         Nombre no valido!
     </span>
     <br>
     <label>Color:</label>
-    <input type="text" name="color" #nombre="ngModel" [(ngModel)]="coche.color" required>
-    <span *ngIf="nombre.touched && !nombre.valid">
+    <input type="text" name="color" #color="ngModel" [(ngModel)]="coche.color" required pattern="[a-zA-Z#]+">
+    <span *ngIf="color.touched && !color.valid">
         Nombre no valido!
     </span>
     <br>
-    <input type="submit" value="aceptar">
-
-
-    <p>
-        Coche:
-        <br>
-        {{coche.nombre}}
-        <br>
-        {{coche.caballos}}
-        <br>
-        {{coche.color}}
-    </p>
-
+    <input type="submit" value="aceptar" [disabled]="!formCoche.form.valid">
+    <h3>Listado de coches</h3>
+    <ul>
+        <li *ngFor="let coche of coches; let i = index;">
+            {{i+1}}:{{coche.nombre}}-{{coche.caballos}}-{{coche.color}}
+        </li>
+    </ul>
 </form>
+
+<p>
+    {{coche.nombre}}-{{coche.caballos}}-{{coche.color}}
+</p>

@@ -1,0 +1,35 @@
+<h2> Componente de Coches</h2>
+
+<form #formCoche="ngForm" (ngSubmit)="onSubmmit()">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="coche.nombre" required>
+    <span *ngIf="nombre.touched && !nombre.valid">
+        Nombre no valido!
+    </span>
+    <br>
+    <label>Caballos:</label>
+    <input type="text" name="caballos" #nombre="ngModel" [(ngModel)]="coche.caballos" required>
+    <span *ngIf="nombre.touched && !nombre.valid">
+        Nombre no valido!
+    </span>
+    <br>
+    <label>Color:</label>
+    <input type="text" name="color" #nombre="ngModel" [(ngModel)]="coche.color" required>
+    <span *ngIf="nombre.touched && !nombre.valid">
+        Nombre no valido!
+    </span>
+    <br>
+    <input type="submit" value="aceptar">
+
+
+    <p>
+        Coche:
+        <br>
+        {{coche.nombre}}
+        <br>
+        {{coche.caballos}}
+        <br>
+        {{coche.color}}
+    </p>
+
+</form>

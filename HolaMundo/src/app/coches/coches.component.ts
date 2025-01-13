@@ -20,7 +20,9 @@ export class CochesComponent {
 
     onSubmmit() {
         console.log(this.coche);
-        this.coches.push(this.coche);
+        let nuevoCoche = new Coche(this.coche.nombre, this.coche.caballos, this.coche.color);
+        this.coches.push(nuevoCoche);
+
     }
 
 }

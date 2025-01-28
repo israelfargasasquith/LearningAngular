@@ -1,0 +1,12 @@
+<h3>{{titulo}}</h3>
+<button (click)="setAdminitrador()">Cambia valor admin</button>
+<br>
+<div *ngIf="administrador; then admin else noAdmin">
+</div>
+<ng-template #noAdmin>
+    <strong>No hay ningun admin activo</strong>
+</ng-template>
+
+<ng-template #admin>
+    <strong>Admin conectado</strong>
+</ng-template>

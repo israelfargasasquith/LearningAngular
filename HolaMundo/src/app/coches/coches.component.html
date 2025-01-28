@@ -29,6 +29,11 @@
     </ul>
 </form>
 
-<p>
-    {{coche.nombre}}-{{coche.caballos}}-{{coche.color}}
-</p>
+<h3>Listado de articulos</h3>
+<ul *ngIf="articulos">
+    <li *ngFor="let articulo of articulos">
+        {{articulo.id}}-{{articulo.title}}
+
+    </li>
+</ul>
+<span *ngIf="!articulos">Cargando lista...</span>

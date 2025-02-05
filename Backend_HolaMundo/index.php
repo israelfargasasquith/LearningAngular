@@ -5,9 +5,21 @@ $app = new \Slim\Slim();
 
 $db = new mysqli('localhost','root','','curso_angular');
 
+//Configuracion de cabeceras HTTP
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+$method = $_SERVER['REQUEST_METHOD'];
+if($method == "OPTIONS") {
+    die();
+}
+
+
+
 $app->get("/pruebas",function() use($app,$db){
     echo "Hola mundo!";
-   var_dump($db);
+   //var_dump($db);
 });
 
 
@@ -73,6 +85,72 @@ $app->get("/delete-producto/:id",function($id) use($app, $db){
     }
     echo json_encode($result);
 });
+
+
+$app->post("/update-producto/:id",function($id) use($app, $db){
+    $json = $app->request->post('json');
+    $data = json_decode($json,true);
+
+    $sql = "UPDATE productos SET ".
+             "nombre = '{$data["nombre"]}', ".
+             "descrip = '{$data["descrip"]}', ".
+             "price = '{$data["price"]}' ".
+             "WHERE id = {$id}";
+    //var_dump($sql);
+
+    if(isset($data["imag"])){
+        $sql .= "image ='{$data["image"]}', ";
+    }
+
+    $query = $db->query($sql);
+    
+    if($query){
+        $result = array(
+            "status" => "success",
+            "code" => 200,
+            "message" => "producto ".$id." actualizad"
+        );
+    }else{
+        $result = array(
+            "status" => "error",
+            "code" => 404,
+            "message" => "producto no actualizado"
+        );
+        
+    }
+    echo json_encode($result);
+});
+
+
+$app->post("/upload-file",function() use($app, $db){
+   
+    if(isset($_FILES['uploads'])){
+        $piramideUploader = new PiramideUploader();
+        $upload = $piramideUploader->upload('image',"uploads","uploads",array('image/jpeg','image/png','image/gif'));
+        $file = $piramideUploader->getInfoFile();
+        $file_name = $file['complete_name'];
+
+        if(isset($upload) && $upload["uploaded"]==false){
+            $result = array(
+                "status" => "error",
+                "code" => 404,
+                "message" => "producto no subido"
+            );      
+        }else{
+            $result = array(
+                "status" => "success",
+                "code" => 200,
+                "message" => "producto subido",
+                "filename" => $file_name
+            );
+        }
+    }
+
+    echo json_encode($result);
+});
+
+
+
 
 
 
